@@ -1,0 +1,22 @@
+{
+  "stays": [
+    {
+      "id": 1,
+      "city": "Helsinki",
+      "maxGuests": 3,
+      "title": "Nice apartment in center of Helsinki",
+      "rating": 4.2,
+      "img": "images/stay1.jpg",
+      "type": "Entire apartment · 3 beds"
+    },
+    {
+      "id": 2,
+      "city": "Turku",
+      "maxGuests": 2,
+      "title": "Cozy studio near the river",
+      "rating": 4.8,
+      "img": "images/stay2.jpg",
+      "type": "Entire studio · 1 bed"
+    }
+  ]
+}
