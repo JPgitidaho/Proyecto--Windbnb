@@ -10,7 +10,7 @@ export function renderDropdown(items, dropdown, input, formatFn) {
 
   items.forEach(item => {
     const li = document.createElement("li");
-    li.className = "flex items-center gap-2 px-4 py-2 text-sm cursor-pointer bg-white";
+    li.className = "flex items-center gap-2 px-4 py-2 text-sm cursor-pointer bg-transparent";
 
     const icon = document.createElement("span");
     icon.innerHTML = `
@@ -67,11 +67,11 @@ export function renderDropdownWithClick(items, dropdown, input, formatFn, counts
 
   items.forEach(item => {
     const li = document.createElement("li");
-    li.className = "flex items-center gap-2 px-4 py-2 text-sm cursor-pointer bg-white dark:bg-gray-900 dark:text-gray-100";
+    li.className = "flex items-center gap-2 px-4 py-2 text-sm cursor bg-white dark:bg-gray-900 dark:text-gray-100";
 
     const icon = document.createElement("span");
     icon.innerHTML = `
-      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 " fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
           d="M12 11c1.657 0 3-1.343 3-3S13.657 5 12 5 9 6.343 9 8s1.343 3 3 3zm0 10c4.418-4.418 7-7.373 7-10a7 7 0 10-14 0c0 2.627 2.582 5.582 7 10z" />
       </svg>`;

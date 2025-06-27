@@ -19,10 +19,10 @@
   <title>Windbnd Vanilla Hotel</title>
 </head>
 
-<body class="bg-white text-gray-800 font-sans dark:bg-gray-900 dark:text-gray-100">
+<body class="bg-whites text-gray-800 font-sans dark:bg-gray-900 dark:text-gray-100">
   <div class="mx-auto sm:px-6 md:px-2 lg:px-10 xl:px-10 max-w-screen ">
-    <header class="flex flex-col sm:flex-row px-4 py-4 md:py-4 ">
-      <div class="absolute top-1 flex items-center md:ml-4">
+    <header class="flex flex-col sm:flex-row px-4 m-6 ">
+      <div class="absolute top-3 left-5 flex items-center md:left-10 lg:left-15">
         <label for="darkToggle" class="relative inline-flex items-center cursor-pointer">
           <input type="checkbox" id="darkToggle" class="sr-only peer" />
           <div class="w-11 h-6 bg-gray-300 rounded-full 
@@ -31,50 +31,46 @@
              peer-checked:translate-x-5 transition"></div>
         </label>
       </div>
-      <div class="w-full flex justify-start pt-5 md:mt-5"><a href="./index.html">
+      <div class="w-full flex justify-start py-5 md:mt-5"><a href="./index.html">
           <img src="./src/images/icons/logo-f7862584.svg" alt="logo" class="w-full h-6 object-contain " />
         </a>
       </div>
 
       <!-- Buscador visible -->
-      <div id="openSearch" class=" relative flex justify-center px-2 py-8 md:py-2 sm:py-1 ">
-        <div
-          class="flex w-11/12 md:w-full max-w-4xl rounded-2xl border border-gray-200 shadow-md dark:shadow-xs shadow-gray-200 overflow-hidden ">
-          <!-- Input Location -->
-          <div class="p-4 bg-white w-2/5 md:w-full dark:bg-gray-800 ">
-            <input type="text" placeholder="Add location "
-              class="w-full text-sm text-gray-600 bg-transparent focus:outline-none dark:text-white" />
-          </div>
-          <!-- Input Guests -->
-          <div class="p-4 md:px-2 bg-white w-2/5 md:w-full border-l border-gray-200 dark:bg-gray-800 ">
-            <input type="text" placeholder="Add guests"
-              class="w-full text-sm text-gray-600 bg-transparent focus:outline-none dark:text-white" />
-          </div>
-          <!-- Search Button -->
-          <div
-            class="p-2 bg-white w-1/5 md:w-auto rounded-r-2xl flex items-center justify-center border-l border-gray-200 dark:bg-gray-800">
-            <button type="button" class="p-2">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-red-500 hover:text-red-600" fill="none"
-                viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 1010.5 18.5a7.5 7.5 0 006.15-3.85z" />
-              </svg>
-            </button>
-          </div>
-        </div>
+      <div id="openSearch"
+        class=" relative flex w-full my-5  rounded-2xl border border-gray-200 dark:text-white shadow-md dark:shadow-xs shadow-gray-200 overflow-hidden   dark:bg-gray-800  md:w-1/2  lg:w-[35%]">
+
+        <!-- Input Location -->
+        <input type="text" placeholder="Add location "
+          class="w-1/2 p-4 text-sm text-gray-600  focus:outline-none dark:text-gray-400 " />
+
+        <!-- Input Guests -->
+
+        <input type="text" placeholder="Add guests"
+          class=" text-sm text-gray-600  focus:outline-none p-4 w-1/2  shadow shadow-gray-400 dark:text-gray-400 " />
+
+        <!-- Search Button -->
+        <button type="button" class="px-2 w-1/6 md:p-2 flex items-center justify-end">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-4 text-red-500 hover:text-red-600" fill="none"
+            viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 1010.5 18.5a7.5 7.5 0 006.15-3.85z" />
+          </svg>
+        </button>
       </div>
+
       <!-- MODAL -->
       <div id="searchModal"
         class="fixed inset-0 z-10 hidden  backdrop-brightness-50  items-start justify-center pt-10 transition dark:bg-black/50">
         <button id="closeModal"
           class="absolute top-5 right-4 text-gray-900 hover:text-red-500 text-xl font-bold z-50">&times;</button>
         <div
-          class="bg-white flex flex-col  md:flex-row items-center rounded-2xl w-full md:h-3/4  p-60 pt-0 md:mt-[-80px]  relative dark:bg-gray-900 dark:text-gray-100">
+          class="bg-white flex flex-col  md:flex-row items-center w-full md:h-3/4  pb-60 pt-20 px-30  md:mt-[-80px]  relative dark:bg-gray-900 dark:text-gray-100">
 
           <!-- Location input -->
           <div class="relative w-full p-1 rounded-l-2xl bg-white border border-gray-100 shadow dark:bg-gray-900 ">
             <input id="ciudades" type="text" placeholder="Add location"
-              class="p-4 w-full z-20 text-sm text-gray-600 focus:outline rounded-2xl dark:text-gray-50 " />
+              class="p-4 w-full z-20 text-sm  focus:outline rounded-2xl dark:text-gray-50 " />
             <ul id="dropdown-ciudades" class="absolute top-full left-0 w-full  bg-white z-60 mt-2 hidden">
             </ul>
           </div>
@@ -85,14 +81,13 @@
             <ul id="dropdown-guests"
               class="absolute top-full left-0 w-full z-50 hidden max-h-40 my-2 bg-white dark:bg-gray-900 dark:text-gray-100">
             </ul>
-            <!-- Contador de personas: oculto por defecto -->
+            <!-- Contador de personas-->
             <div id="guest-counter"
               class="hidden absolute top-full left-0 w-full mt-2 p-4 bg-white z-40   space-y-4 text-sm text-gray-700 font-sans dark:bg-gray-900 dark:text-gray-100">
-
               <!-- Adults -->
               <div class="space-y-1 dark:bg-gray-900 dark:text-gray-100">
-                <div class="text-gray-900 font-medium">Adults</div>
-                <div class="text-xs text-gray-500">Ages 13 or above</div>
+                <p class="text-gray-900 font-medium">Adults</p>
+                <p class="text-xs text-gray-500">Ages 13 or above</p>
                 <div class="flex items-center gap-4 mt-1">
                   <button id="adult-minus-escritorio"
                     class="w-8 h-8 border rounded text-lg font-bold bg-gray-200 text-gray-700">-</button>
@@ -101,11 +96,10 @@
                     class="w-8 h-8 border rounded text-lg font-bold bg-gray-200 text-gray-700">+</button>
                 </div>
               </div>
-
               <!-- Children -->
-              <div class="space-y-1">
-                <div class="text-gray-900 font-medium">Children</div>
-                <div class="text-xs text-gray-500">Ages 13 or above</div>
+              <div>
+                <p class="text-gray-900 font-medium">Children</p>
+                <p class="text-xs text-gray-500">Age 13 or above</p>
                 <div class="flex items-center gap-4 mt-1">
                   <button id="child-minus-escritorio"
                     class="w-8 h-8 border rounded text-lg font-bold bg-gray-200 text-gray-700">-</button>
@@ -115,7 +109,6 @@
                 </div>
               </div>
             </div>
-
           </div>
           <!-- Search button -->
           <div
@@ -142,8 +135,6 @@
             <button id="closeModalCelular"
               class="text-lg font-bold text-gray-700 cursor-pointer px-2  transition duration-300 ease-in-out dark:text-gray-200">X</button>
           </div>
-
-
           <!-- Contenedor de inputs -->
           <div class="flex flex-col space-y-4">
             <!-- Input de ubicación -->
@@ -159,8 +150,6 @@
               <input id="guests-celular" type="text" placeholder="Add guests"
                 class="p-6 w-full text-sm text-gray-600 focus:outline rounded-2xl dark:text-gray-200" />
               <ul id="dropdown-guests-celular" class="top-full left-0 w-full z-50 mt-2  hidden"></ul>
-
-
             </div>
             <!-- Contador para celular -->
             <div id="guest-counter-celular"
@@ -191,7 +180,7 @@
               </div>
             </div>
             <!-- Botón de búsqueda -->
-            <div class="flex justify-center pt-60">
+            <div class="flex justify-center pt-50">
               <button id="searchBtn-celular"
                 class="bg-rose-500 text-white px-6 py-2 text-sm font-semibold hover:bg-rose-600 transition rounded-full flex items-center space-x-2 ">
                 <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
