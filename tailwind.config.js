@@ -1,12 +1,11 @@
-
-
 module.exports = {
+  darkMode: 'class', 
   theme: {
     extend: {
       fontFamily: {
-        raleway: ['Raleway', 'sans-serif'],
+        roboto: ['Roboto', 'sans-serif'],
       },
     },
   },
-};
-
+  
+}

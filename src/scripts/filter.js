@@ -1,5 +1,8 @@
+// filter.js
+
 import { stays } from './stays.js';
-import { renderStays } from './utils.js';
+import { renderStays } from './render.js';
+import { renderDropdownWithClick, setupCounter, updateGuestInput } from './utils.js';
 
 export function setupFilters() {
   const staysContainer = document.getElementById("stays-container");
@@ -11,7 +14,6 @@ export function setupFilters() {
   const dropdownCity = document.getElementById("dropdown-ciudades");
   const dropdownGuests = document.getElementById("dropdown-guests");
 
-
   const searchModalCelular = document.getElementById("searchModalCelular");
   const closeModalCelular = document.getElementById("closeModalCelular");
   const inputCityCelular = document.getElementById("ciudades-celular");
@@ -21,110 +23,82 @@ export function setupFilters() {
   const searchBtn = document.getElementById("searchBtn");
   const searchBtnCelular = document.getElementById("searchBtn-celular");
 
+  // Estado interno de invitados
+  const counts = { adult: 1, child: 0 };
+  const uniqueCities = [...new Set(stays.map(stay => stay.city))];
+  const guestOptions = Array.from({ length: 8 }, (_, i) => i + 1);
+
+  // Render inicial
   renderStays(stays, staysContainer);
-  searchBtn
+ 
+
+function updateCityCountText(array) {
+  const cityCountSpan = document.getElementById("city-count");
+  if (!cityCountSpan) return;
+
+  if (!array) {
+    cityCountSpan.textContent = "12+ stays";
+    return;
+  }
+
+  const totalStays = array.length;
+  cityCountSpan.textContent = totalStays === 0
+    ? "No stays available"
+    : `${totalStays} stay${totalStays !== 1 ? 's' : ''} available`;
+}
+
+  renderStays(stays, staysContainer);
+  updateCityCountText(null, true);
+
+  // Abrir/cerrar modales desktop/móvil
   openSearch.addEventListener("click", () => {
     if (window.innerWidth < 768) {
-      searchModalCelular.classList.remove("hidden");
-      searchModalCelular.classList.add("flex");
+      searchModalCelular.classList.replace("hidden", "flex");
     } else {
-      searchModal.classList.remove("hidden");
-      searchModal.classList.add("flex");
+      searchModal.classList.replace("hidden", "flex");
     }
   });
 
   closeModal.addEventListener("click", () => {
-    searchModal.classList.add("hidden");
-    searchModal.classList.remove("flex");
+    searchModal.classList.replace("flex", "hidden");
   });
 
-  searchModal.addEventListener("click", (e) => {
+  searchModal.addEventListener("click", e => {
     if (e.target === searchModal) {
-      searchModal.classList.add("hidden");
-      searchModal.classList.remove("flex");
+      searchModal.classList.replace("flex", "hidden");
     }
   });
 
   closeModalCelular.addEventListener("click", () => {
-    searchModalCelular.classList.add("hidden");
-    searchModalCelular.classList.remove("flex");
+    searchModalCelular.classList.replace("flex", "hidden");
   });
 
-  searchModalCelular.addEventListener("click", (e) => {
+  searchModalCelular.addEventListener("click", e => {
     if (e.target === searchModalCelular) {
-      searchModalCelular.classList.add("hidden");
-      searchModalCelular.classList.remove("flex");
+      searchModalCelular.classList.replace("flex", "hidden");
     }
   });
 
-  const uniqueCities = [...new Set(stays.map(stay => stay.city))];
-  const guestOptions = Array.from({ length: 8 }, (_, i) => i + 1);
-
+  // Setup autocomplete con renderDropdownWithClick (que actualiza conteo)
   function setupAutocomplete(inputElement, dropdownElement, options, formatFn, filterFn = (q, opt) => opt.toLowerCase().includes(q.toLowerCase())) {
     inputElement.addEventListener("input", () => {
       const query = inputElement.value;
       const filtered = options.filter(opt => filterFn(query, opt));
-      renderDropdown(filtered, dropdownElement, inputElement, formatFn);
+      renderDropdownWithClick(filtered, dropdownElement, inputElement, formatFn, counts, inputGuests, inputGuestsCelular);
     });
 
     inputElement.addEventListener("focus", () => {
-      renderDropdown(options, dropdownElement, inputElement, formatFn);
+      renderDropdownWithClick(options, dropdownElement, inputElement, formatFn, counts, inputGuests, inputGuestsCelular);
     });
   }
 
-  function renderDropdown(items, dropdown, input, formatFn) {
-    dropdown.innerHTML = "";
-    dropdown.classList.remove("hidden");
-
-    items.forEach(item => {
-      const li = document.createElement("li");
-      li.className = "flex items-center gap-2 px-4 py-2 text-sm cursor-pointer";
-
-      const icon = document.createElement("span");
-      icon.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-        d="M12 11c1.657 0 3-1.343 3-3S13.657 5 12 5 9 6.343 9 8s1.343 3 3 3zm0 10c4.418-4.418 7-7.373 7-10a7 7 0 10-14 0c0 2.627 2.582 5.582 7 10z" />
-    </svg>`;
-      const text = document.createElement("span");
-      text.textContent = formatFn(item);
-
-      li.appendChild(icon);
-      li.appendChild(text);
-
-      li.addEventListener("click", () => {
-        input.value = item;
-        dropdown.classList.add("hidden");
-
-        // Actualiza los contadores si es un input de invitados
-        if (input.id === "guests" && window.innerWidth >= 768) {
-          counts.adult = parseInt(item); 
-          counts.child = 0;
-          updateGuestInput();
-          document.getElementById("adult-count-escritorio").textContent = counts.adult;
-          document.getElementById("child-count-escritorio").textContent = counts.child;
-          document.getElementById("guest-counter")?.classList.remove("hidden");
-        }
-
-        if (input.id === "guests-celular" && window.innerWidth < 768) {
-          counts.adult = parseInt(item); 
-          counts.child = 0;
-          updateGuestInput();
-          document.getElementById("adult-count").textContent = counts.adult;
-          document.getElementById("child-count").textContent = counts.child;
-          document.getElementById("guest-counter-celular")?.classList.remove("hidden");
-        }
-      });
-
-      dropdown.appendChild(li);
-    });
-  }
-
-
+  // Llamadas setup autocomplete para inputs desktop y móvil
   setupAutocomplete(inputCity, dropdownCity, uniqueCities, city => `${city}, Finland`);
   setupAutocomplete(inputGuests, dropdownGuests, guestOptions, num => `${num} guest${num > 1 ? 's' : ''}`, (q, num) => num.toString().startsWith(q));
   setupAutocomplete(inputCityCelular, dropdownCityCelular, uniqueCities, city => `${city}, Finland`);
   setupAutocomplete(inputGuestsCelular, dropdownGuestsCelular, guestOptions, num => `${num} guest${num > 1 ? 's' : ''}`, (q, num) => num.toString().startsWith(q));
 
+  // Ocultar dropdowns al hacer click afuera
   document.addEventListener("click", (e) => {
     if (!e.target.closest("#ciudades")) dropdownCity.classList.add("hidden");
     if (!e.target.closest("#guests")) dropdownGuests.classList.add("hidden");
@@ -132,71 +106,62 @@ export function setupFilters() {
     if (!e.target.closest("#guests-celular")) dropdownGuestsCelular.classList.add("hidden");
   });
 
-  const counts = { adult: 1, child: 0 };
+  // Setup contadores botones + y - para adultos y niños
+  setupCounter("adult-minus", "adult-plus", "adult", counts, "adult-count", () => updateGuestInput(inputGuests, inputGuestsCelular, counts));
+  setupCounter("child-minus", "child-plus", "child", counts, "child-count", () => updateGuestInput(inputGuests, inputGuestsCelular, counts));
+  setupCounter("adult-minus-escritorio", "adult-plus-escritorio", "adult", counts, "adult-count-escritorio", () => updateGuestInput(inputGuests, inputGuestsCelular, counts));
+  setupCounter("child-minus-escritorio", "child-plus-escritorio", "child", counts, "child-count-escritorio", () => updateGuestInput(inputGuests, inputGuestsCelular, counts));
 
-  function updateGuestInput() {
-    const total = counts.adult + counts.child;
-    inputGuestsCelular.value = `${total} guest${total !== 1 ? 's' : ''}`;
-    inputGuests.value = `${total} guest${total !== 1 ? 's' : ''}`;
-  }
-
-  function setupCounter(minusId, plusId, countKey, labelId) {
-    document.getElementById(minusId)?.addEventListener("click", () => {
-      if (counts[countKey] > (countKey === 'adult' ? 1 : 0)) {
-        counts[countKey]--;
-        document.getElementById(labelId).textContent = counts[countKey];
-        updateGuestInput();
-      }
-    });
-
-    document.getElementById(plusId)?.addEventListener("click", () => {
-      counts[countKey]++;
-      document.getElementById(labelId).textContent = counts[countKey];
-      updateGuestInput();
-    });
-  }
-
-  setupCounter("adult-minus", "adult-plus", "adult", "adult-count");
-  setupCounter("child-minus", "child-plus", "child", "child-count");
-  setupCounter("adult-minus-escritorio", "adult-plus-escritorio", "adult", "adult-count-escritorio");
-  setupCounter("child-minus-escritorio", "child-plus-escritorio", "child", "child-count-escritorio");
-
+  // Inicializar contadores en UI
   document.getElementById("adult-count").textContent = counts.adult;
   document.getElementById("child-count").textContent = counts.child;
   document.getElementById("adult-count-escritorio").textContent = counts.adult;
   document.getElementById("child-count-escritorio").textContent = counts.child;
-  updateGuestInput();
+  updateGuestInput(inputGuests, inputGuestsCelular, counts);
 
-  function handleSearch(cityInput, guestInput, modal, isMobile = false) {
-  const city = cityInput.value.trim().toLowerCase();
+  // Función que filtra stays según ciudad e invitados, luego renderiza y actualiza contador
+function updateCityCountText(array, inicial = false) {
+    const cityCountSpan = document.getElementById("city-count");
+    if (!cityCountSpan) return;
 
-  let guestCount;
-  if (isMobile) {
-    guestCount = counts.adult + counts.child;
-  } else {
-    const match = guestInput.value.match(/\d+/);
-    guestCount = match ? parseInt(match[0]) : 0;
+    if (inicial) {
+      cityCountSpan.textContent = "12+ stays";
+      return;
+    }
+
+    if (!array || array.length === 0) {
+      cityCountSpan.textContent = "No stays available";
+      return;
+    }
+
+    const totalStays = array.length;
+    cityCountSpan.textContent = `${totalStays} stay${totalStays !== 1 ? 's' : ''} available`;
   }
 
-  const filtered = stays.filter(stay => {
-    const matchesCity = city ? stay.city.toLowerCase() === city : true;
-    const matchesGuests = guestCount ? stay.maxGuests >= guestCount : true;
-    return matchesCity && matchesGuests;
-  });
+  function handleSearch(cityInput, guestInput, modal, isMobile = false) {
+    const city = cityInput.value.trim().toLowerCase();
 
-  renderStays(filtered, staysContainer); 
-  modal.classList.add("hidden");
-  modal.classList.remove("flex");
-}
+    let guestCount;
+    if (isMobile) {
+      guestCount = counts.adult + counts.child;
+    } else {
+      const match = guestInput.value.match(/\d+/);
+      guestCount = match ? parseInt(match[0]) : 0;
+    }
 
-searchBtn.addEventListener("click", () => {
-  console.log("Botón escritorio clickeado");
-  handleSearch(inputCity, inputGuests, searchModal, false);
-});
+    const filtered = stays.filter(stay => {
+      const matchesCity = city ? stay.city.toLowerCase() === city : true;
+      const matchesGuests = guestCount ? stay.maxGuests >= guestCount : true;
+      return matchesCity && matchesGuests;
+    });
 
-searchBtnCelular.addEventListener("click", () => {
-  console.log("Botón celular clickeado");
-  handleSearch(inputCityCelular, inputGuestsCelular, searchModalCelular, true);
-});
+    renderStays(filtered, staysContainer, true);
+updateCityCountText(filtered);
 
+    modal.classList.replace("flex", "hidden");
+  }
+
+  // Eventos para botones de búsqueda (desktop y móvil)
+  searchBtn.addEventListener("click", () => handleSearch(inputCity, inputGuests, searchModal, false));
+  searchBtnCelular.addEventListener("click", () => handleSearch(inputCityCelular, inputGuestsCelular, searchModalCelular, true));
 }
