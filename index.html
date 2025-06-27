@@ -65,75 +65,76 @@
       </div>
       <!-- MODAL -->
       <div id="searchModal"
-        class="fixed inset-0 z-10 hidden  backdrop-brightness-50  items-start justify-center pt-20 transition dark:bg-black/50">
+        class="fixed inset-0 z-10 hidden  backdrop-brightness-50  items-start justify-center pt-10 transition dark:bg-black/50">
         <button id="closeModal"
           class="absolute top-5 right-4 text-gray-900 hover:text-red-500 text-xl font-bold z-50">&times;</button>
-        <div class="bg-white w-full md:h-1/2 md:p-30 md:pt-10 lg:p-50 p-60 md:mt-[-80px] lg:pt-20 relative dark:bg-gray-900 dark:text-gray-100">
-          <div class="flex flex-col  md:flex-row items-center w-full  rounded-2xl">
-            <!-- Location input -->
-            <div class="relative w-full p-1 rounded-l-2xl bg-white border border-gray-100 shadow dark:bg-gray-900 ">
-              <input id="ciudades" type="text" placeholder="Add location"
-                class="p-4 w-full z-20 text-sm text-gray-600 focus:outline rounded-2xl dark:text-gray-50 " />
-              <ul id="dropdown-ciudades" class="absolute top-full left-0 w-full  bg-white z-60 mt-2 hidden">
-              </ul>
-            </div>
-            <!-- Guests input -->
-            <div class="relative w-full border p-1 border-gray-100 shadow dark:bg-gray-900 ">
-              <input id="guests" type="text" placeholder="Add guests"
-                class="p-4 mx-0.5 w-full text-sm text-gray-600 focus:outline  rounded-2xl dark:text-gray-100" />
-              <ul id="dropdown-guests"
-                class="absolute top-full left-0 w-full z-50 hidden max-h-40 my-2 bg-white dark:bg-gray-900 dark:text-gray-100">
-              </ul>
-              <!-- Contador de personas: oculto por defecto -->
-              <div id="guest-counter"
-                class="hidden absolute top-full left-0 w-full mt-2 p-4 bg-white z-40   space-y-4 text-sm text-gray-700 font-sans dark:bg-gray-900 dark:text-gray-100">
+        <div
+          class="bg-white flex flex-col  md:flex-row items-center rounded-2xl w-full md:h-3/4  p-60 pt-0 md:mt-[-80px]  relative dark:bg-gray-900 dark:text-gray-100">
 
-                <!-- Adults -->
-                <div class="space-y-1 dark:bg-gray-900 dark:text-gray-100">
-                  <div class="text-gray-900 font-medium">Adults</div>
-                  <div class="text-xs text-gray-500">Ages 13 or above</div>
-                  <div class="flex items-center gap-4 mt-1">
-                    <button id="adult-minus-escritorio"
-                      class="w-8 h-8 border rounded text-lg font-bold bg-gray-200 text-gray-700">-</button>
-                    <span id="adult-count-escritorio" class="w-4 text-center">1</span>
-                    <button id="adult-plus-escritorio"
-                      class="w-8 h-8 border rounded text-lg font-bold bg-gray-200 text-gray-700">+</button>
-                  </div>
-                </div>
+          <!-- Location input -->
+          <div class="relative w-full p-1 rounded-l-2xl bg-white border border-gray-100 shadow dark:bg-gray-900 ">
+            <input id="ciudades" type="text" placeholder="Add location"
+              class="p-4 w-full z-20 text-sm text-gray-600 focus:outline rounded-2xl dark:text-gray-50 " />
+            <ul id="dropdown-ciudades" class="absolute top-full left-0 w-full  bg-white z-60 mt-2 hidden">
+            </ul>
+          </div>
+          <!-- Guests input -->
+          <div class="relative w-full border p-1 border-gray-100 shadow dark:bg-gray-900 ">
+            <input id="guests" type="text" placeholder="Add guests"
+              class="p-4 mx-0.5 w-full text-sm text-gray-600 focus:outline  rounded-2xl dark:text-gray-100" />
+            <ul id="dropdown-guests"
+              class="absolute top-full left-0 w-full z-50 hidden max-h-40 my-2 bg-white dark:bg-gray-900 dark:text-gray-100">
+            </ul>
+            <!-- Contador de personas: oculto por defecto -->
+            <div id="guest-counter"
+              class="hidden absolute top-full left-0 w-full mt-2 p-4 bg-white z-40   space-y-4 text-sm text-gray-700 font-sans dark:bg-gray-900 dark:text-gray-100">
 
-                <!-- Children -->
-                <div class="space-y-1">
-                  <div class="text-gray-900 font-medium">Children</div>
-                  <div class="text-xs text-gray-500">Ages 13 or above</div>
-                  <div class="flex items-center gap-4 mt-1">
-                    <button id="child-minus-escritorio"
-                      class="w-8 h-8 border rounded text-lg font-bold bg-gray-200 text-gray-700">-</button>
-                    <span id="child-count-escritorio" class="w-4 text-center">0</span>
-                    <button id="child-plus-escritorio"
-                      class="w-8 h-8 border rounded text-lg font-bold bg-gray-200 text-gray-700">+</button>
-                  </div>
+              <!-- Adults -->
+              <div class="space-y-1 dark:bg-gray-900 dark:text-gray-100">
+                <div class="text-gray-900 font-medium">Adults</div>
+                <div class="text-xs text-gray-500">Ages 13 or above</div>
+                <div class="flex items-center gap-4 mt-1">
+                  <button id="adult-minus-escritorio"
+                    class="w-8 h-8 border rounded text-lg font-bold bg-gray-200 text-gray-700">-</button>
+                  <span id="adult-count-escritorio" class="w-4 text-center">1</span>
+                  <button id="adult-plus-escritorio"
+                    class="w-8 h-8 border rounded text-lg font-bold bg-gray-200 text-gray-700">+</button>
                 </div>
               </div>
 
+              <!-- Children -->
+              <div class="space-y-1">
+                <div class="text-gray-900 font-medium">Children</div>
+                <div class="text-xs text-gray-500">Ages 13 or above</div>
+                <div class="flex items-center gap-4 mt-1">
+                  <button id="child-minus-escritorio"
+                    class="w-8 h-8 border rounded text-lg font-bold bg-gray-200 text-gray-700">-</button>
+                  <span id="child-count-escritorio" class="w-4 text-center">0</span>
+                  <button id="child-plus-escritorio"
+                    class="w-8 h-8 border rounded text-lg font-bold bg-gray-200 text-gray-700">+</button>
+                </div>
+              </div>
             </div>
-            <!-- Search button -->
-            <div
-              class="flex justify-center p-3 w-full md:rounded-r-2xl md: bg-white md:border border-gray-100 md:shadow dark:bg-gray-900 dark:text-green-100">
-              <button id="searchBtn"
-                class="bg-rose-500 text-white px-6 py-2 text-sm font-semibold hover:bg-rose-600 transition rounded-full flex items-center space-x-2">
-                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round"
-                    d="M21 21l-4.35-4.35M11 18a7 7 0 100-14 7 7 0 000 14z" />
-                </svg>
-                <span>search</span>
-              </button>
-            </div>
+
+          </div>
+          <!-- Search button -->
+          <div
+            class="flex justify-center p-3 w-full md:rounded-r-2xl md: bg-white md:border border-gray-100 md:shadow dark:bg-gray-900 dark:text-green-100">
+            <button id="searchBtn"
+              class="bg-rose-500 text-white px-6 py-2 text-sm font-semibold hover:bg-rose-600 transition rounded-full flex items-center space-x-2">
+              <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M21 21l-4.35-4.35M11 18a7 7 0 100-14 7 7 0 000 14z" />
+              </svg>
+              <span>search</span>
+            </button>
           </div>
         </div>
+
       </div>
       <!-- MODAL CELULAR -->
       <div id="searchModalCelular"
-        class="fixed inset-0 z-10 hidden  backdrop-brightness-50 flex md:hidden items-start justify-center pt-0 transition dark:bg-black/50">
+        class="fixed inset-0 z-10   backdrop-brightness-50 flex md:hidden items-start justify-center pt-0 transition dark:bg-black/50">
         <!-- Contenedor principal -->
         <div class="bg-white w-full pb-10 py-5 px-5 absolute shadow dark:bg-gray-900">
           <div class="flex justify-between items-center mb-4  ">
