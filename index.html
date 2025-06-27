@@ -22,12 +22,7 @@
 <body class="bg-white text-gray-800 font-sans dark:bg-gray-900 dark:text-gray-100">
   <div class="mx-auto sm:px-6 md:px-2 lg:px-10 xl:px-10 max-w-screen ">
     <header class="flex flex-col sm:flex-row px-4 py-4 md:py-4 ">
-      <div class="w-full flex justify-start p-1 md:mt-5"><a href="./index.html">
-          <img src="./src/images/icons/logo-f7862584.svg" alt="logo" class=" h-6 object-contain" />
-        </a>
-
-      </div>
-      <div class="ml-40 flex items-center md:ml-4">
+      <div class="absolute top-1 flex items-center md:ml-4">
         <label for="darkToggle" class="relative inline-flex items-center cursor-pointer">
           <input type="checkbox" id="darkToggle" class="sr-only peer" />
           <div class="w-11 h-6 bg-gray-300 rounded-full 
@@ -36,8 +31,13 @@
              peer-checked:translate-x-5 transition"></div>
         </label>
       </div>
+      <div class="w-full flex justify-start py-3 md:mt-5"><a href="./index.html">
+          <img src="./src/images/icons/logo-f7862584.svg" alt="logo" class="w-full h-6 object-contain " />
+        </a>
+      </div>
+
       <!-- Buscador visible -->
-      <div id="openSearch" class=" relative flex justify-center px-2 py-8 md:py-2 ">
+      <div id="openSearch" class=" relative flex justify-center px-2 py-8 md:py-2 sm:py-1 ">
         <div
           class="flex w-11/12 md:w-full max-w-4xl rounded-2xl border border-gray-200 shadow-md dark:shadow-xs shadow-gray-200 overflow-hidden ">
           <!-- Input Location -->
