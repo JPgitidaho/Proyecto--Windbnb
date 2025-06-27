@@ -6,7 +6,7 @@ export function renderStays(staysArray, container, showGuests = false) {
     card.className = "stay-card  ";
 
     card.innerHTML = `
-      <img src="${stay.photo}" alt="${stay.title}" class="rounded-3xl w-full h-70 sm:h-60 md:h-70 lg:h-60 xl:h-80 2xl:h-90 object-cover">
+      <img src="${stay.photo}" alt="${stay.title}" class="rounded-3xl  aspect-[4/3] w-full  h-64 sm:h-60 md:h-64 lg:h-60 xl:h-80 2xl:h-96 object-cover">
       <div class="flex relative mt-2 text-sm text-gray-600 dark:bg-gray-900 dark:text-gray-200">
         ${stay.superHost ? `<span class="px-2 py-1 border rounded-full text-xs font-bold dark:bg-gray-900 dark:text-gray-100">SUPER HOST</span>` : ""}
         <span class="px-1">${stay.type}${stay.beds ? ` · ${stay.beds} beds` : ""}</span>

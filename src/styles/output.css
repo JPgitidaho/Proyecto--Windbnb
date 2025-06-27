@@ -330,6 +330,9 @@
   .table {
     display: table;
   }
+  .aspect-\[4\/3\] {
+    aspect-ratio: 4/3;
+  }
   .size-6 {
     width: calc(var(--spacing) * 6);
     height: calc(var(--spacing) * 6);
@@ -346,8 +349,14 @@
   .h-8 {
     height: calc(var(--spacing) * 8);
   }
+  .h-48 {
+    height: calc(var(--spacing) * 48);
+  }
   .h-60 {
     height: calc(var(--spacing) * 60);
+  }
+  .h-64 {
+    height: calc(var(--spacing) * 64);
   }
   .h-70 {
     height: calc(var(--spacing) * 70);
@@ -583,6 +592,9 @@
   .pt-0 {
     padding-top: calc(var(--spacing) * 0);
   }
+  .pt-5 {
+    padding-top: calc(var(--spacing) * 5);
+  }
   .pt-20 {
     padding-top: calc(var(--spacing) * 20);
   }
@@ -761,6 +773,16 @@
       height: calc(var(--spacing) * 60);
     }
   }
+  .sm\:h-64 {
+    @media (width >= 40rem) {
+      height: calc(var(--spacing) * 64);
+    }
+  }
+  .sm\:h-80 {
+    @media (width >= 40rem) {
+      height: calc(var(--spacing) * 80);
+    }
+  }
   .sm\:grid-cols-2 {
     @media (width >= 40rem) {
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -829,6 +851,11 @@
   .md\:h-1\/2 {
     @media (width >= 48rem) {
       height: calc(1/2 * 100%);
+    }
+  }
+  .md\:h-64 {
+    @media (width >= 48rem) {
+      height: calc(var(--spacing) * 64);
     }
   }
   .md\:h-70 {
@@ -922,6 +949,11 @@
   .\32 xl\:h-90 {
     @media (width >= 96rem) {
       height: calc(var(--spacing) * 90);
+    }
+  }
+  .\32 xl\:h-96 {
+    @media (width >= 96rem) {
+      height: calc(var(--spacing) * 96);
     }
   }
   .dark\:bg-black\/50 {
